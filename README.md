@@ -19,6 +19,8 @@ Plans to support some cool features (TBA):
 
 Notes:
 - I (and the book) make use of `.envrc` files to properly set enviroment variables. This is done using a package called [direnv][direnv], or equivalent for your distribution.
+- I (and the book) use Go 1.7, YMMV with lower versions.
+
 
 
 [go-go-logo]: https://github.com/vkandola/go-go-gadget/blob/master/go-go-logo.jpg "Inspector Gadget Approves of this language!"
