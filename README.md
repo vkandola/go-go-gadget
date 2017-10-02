@@ -28,6 +28,8 @@ Running the REPL:
 Running the package tests:
 - execute `make test` and see the test report.
 
+Running the source code formatter:
+- execute `make format` and see list of files that were re-formatted.
 
 
 [go-go-logo]: https://github.com/vkandola/go-go-gadget/blob/master/go-go-logo.jpg "Inspector Gadget Approves of this language!"
