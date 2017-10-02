@@ -15,7 +15,7 @@ Disclaimer:
 Plans to support some cool features (TBA):
 - All of the Monkey language features (as I progress through the book).
 - Support for some hash based data structures and B/B+ trees.
-- Some handy bit manipulation (for hex editing mainly).
+- Support for binary, hex, float/decimal literals.
 - UTF/Emoji support (currently pure ASCI).
 
 Notes:
