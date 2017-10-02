@@ -14,7 +14,7 @@ func New(input string) *Lexer {
 
 func (l *Lexer) readChar() {
 	if l.readPosition >= len(l.input) {
-		l.ch = 0
+		l.ch = 0 // return 0 byte if EOF
 	} else {
 		l.ch = l.input[l.readPosition]
 	}
