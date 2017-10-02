@@ -16,6 +16,7 @@ Plans to support some cool features (TBA):
 - All of the Monkey language features (as I progress through the book).
 - Support for some hash based data structures and B/B+ trees.
 - Some handy bit manipulation (for hex editing mainly).
+- UTF/Emoji support (currently pure ASCI)
 
 Notes:
 - I (and the book) make use of `.envrc` files to properly set enviroment variables. This is done using a package called [direnv][direnv], or equivalent for your distribution.
