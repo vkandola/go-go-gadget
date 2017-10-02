@@ -16,11 +16,17 @@ Plans to support some cool features (TBA):
 - All of the Monkey language features (as I progress through the book).
 - Support for some hash based data structures and B/B+ trees.
 - Some handy bit manipulation (for hex editing mainly).
-- UTF/Emoji support (currently pure ASCI)
+- UTF/Emoji support (currently pure ASCI).
 
 Notes:
-- I (and the book) make use of `.envrc` files to properly set enviroment variables. This is done using a package called [direnv][direnv], or equivalent for your distribution.
+- I (and the book) make use of `.envrc` files to properly set enviroment variables. This is no longer needed as the Makefile should call scripts to properly set things. However, you'll need [direnv][direnv], or equivalent for your distribution if you aren't running the Makefile.
 - I (and the book) use Go 1.7, YMMV with lower versions.
+
+Running the REPL:
+- execute `make run` and enter the REPL.
+
+Running the package tests:
+- execute `make test` and see the test report.
 
 
 
