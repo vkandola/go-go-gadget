@@ -1,3 +1,5 @@
+export GOPATH=$(PWD)
+
 test:
 	@echo "Running Gadget tests."
 	@./test.sh
