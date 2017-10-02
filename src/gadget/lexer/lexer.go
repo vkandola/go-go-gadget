@@ -2,6 +2,8 @@ package lexer
 
 import "gadget/token"
 
+const EOF_BYTE = 0 // 0 byte for EOF
+
 type Lexer struct {
 	input        string
 	position     int  // current position in input (points to current char)
@@ -17,7 +19,7 @@ func New(input string) *Lexer {
 
 func (l *Lexer) readChar() {
 	if l.readPosition >= len(l.input) {
-		l.ch = 0 // return 0 byte if EOF
+		l.ch = EOF_BYTE
 	} else {
 		l.ch = l.input[l.readPosition]
 	}
@@ -32,13 +34,23 @@ func (l *Lexer) NextToken() token.Token {
 
 	switch l.ch { // Keep ordered as defined in token.go
 	case '=':
-		tok = newToken(token.ASSIGN, l.ch)
+		if l.peekChar() == '=' { // Double character operators are nested
+			l.readChar()
+			tok = token.Token{Type: token.EQ, Literal: "=="}
+		} else {
+			tok = newToken(token.ASSIGN, l.ch)
+		}
 	case '+':
 		tok = newToken(token.PLUS, l.ch)
 	case '-':
 		tok = newToken(token.MINUS, l.ch)
 	case '!':
-		tok = newToken(token.BANG, l.ch)
+		if l.peekChar() == '=' {
+			l.readChar()
+			tok = token.Token{Type: token.NEQ, Literal: "!="}
+		} else {
+			tok = newToken(token.BANG, l.ch)
+		}
 	case '*':
 		tok = newToken(token.ASTERISK, l.ch)
 	case '/':
@@ -59,7 +71,7 @@ func (l *Lexer) NextToken() token.Token {
 		tok = newToken(token.LBRACE, l.ch)
 	case '}':
 		tok = newToken(token.RBRACE, l.ch)
-	case 0:
+	case EOF_BYTE:
 		tok.Literal = ""
 		tok.Type = token.EOF
 	default:
@@ -111,5 +123,13 @@ func isLetter(ch byte) bool {
 func (l *Lexer) skipWhitespace() {
 	for l.ch == ' ' || l.ch == '\t' || l.ch == '\n' || l.ch == '\r' {
 		l.readChar()
+	}
+}
+
+func (l *Lexer) peekChar() byte {
+	if l.readPosition >= len(l.input) {
+		return EOF_BYTE
+	} else {
+		return l.input[l.readPosition]
 	}
 }
