@@ -1,3 +1,7 @@
+## vi(m) temporary files
+*.swp
+*~
+
 ## GO PROGRAMMING LANGUAGE GITIGNORE a la https://github.com/github/gitignore/blob/master/Go.gitignore
 
 # Binaries for programs and plugins
