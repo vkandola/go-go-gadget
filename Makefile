@@ -12,5 +12,9 @@ run:
 	@echo "Running the Gadget REPL."
 	@./run.sh
 	@echo "Exited Gadget REPL."
+todo:
+	@echo "Greppin'for any TODOs in the source code!"
+	@./todo.sh
+	@echo "Done Greppin'."
 all:
 	@echo "usage: make (test|format|run)"
