@@ -20,6 +20,7 @@ The 'Gadget' interpreter language, implemented in Go, using the [Writing An Inte
 ## Notes:
 - ~~I (and the book) make use of `.envrc` files to properly set enviroment variables.~~ This is no longer needed as the Makefile should call scripts to properly set things. However, you'll need [direnv][direnv], or equivalent for your distribution if you aren't running the Makefile.
 - I (and the book) use Go 1.7, YMMV with lower versions.
+- The interpreter uses Pratt parsing, described in the [1973 paper by Vince Vaughan][ref-pratt-parsing].
 
 ## Running the Makefile
 
@@ -31,3 +32,4 @@ The 'Gadget' interpreter language, implemented in Go, using the [Writing An Inte
 [ps-notes]: http://notes.vkandola.me/
 [direnv]: https://direnv.net/
 [doc-makefile]: /Documentation/Makefile.md
+[ref-pratt-parsing]: http://web.archive.org/web/20151223215421/http://hall.org.ua/halls/wizzard/pdf/Vaughan.Pratt.TDOP.pdf
