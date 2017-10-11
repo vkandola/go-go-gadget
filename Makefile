@@ -1,20 +1,21 @@
 export GOPATH=$(PWD)
+SCRIPTDIR=scripts
 
 test:
 	@echo "Running Gadget tests."
-	@./test.sh
+	@./$(SCRIPTDIR)/test.sh
 	@echo "Done running Gadget tests."
 format:
 	@echo "Running gofmt on source files."
-	@./format.sh
+	@./$(SCRIPTDIR)/format.sh
 	@echo "Done formatting source files."
 run:
 	@echo "Running the Gadget REPL."
-	@./run.sh
+	@./$(SCRIPTDIR)/run.sh
 	@echo "Exited Gadget REPL."
 todo:
 	@echo "Greppin'for any TODOs in the source code!"
-	@./todo.sh
+	@./$(SCRIPTDIR)/todo.sh
 	@echo "Done Greppin'."
 all:
 	@echo "usage: make (test|format|run)"
