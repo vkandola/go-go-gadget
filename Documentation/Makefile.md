@@ -1,12 +1,13 @@
-## Makefile options
-# Running the REPL:
+# Makefile documentation
+
+## Enter the Gadget REPL:
 - execute `make run` and enter the REPL.
 
-# Running the package tests:
+## Run the package tests:
 - execute `make test` and see the test report.
 
-# Running the source code formatter:
+## Run the source code formatter:
 - execute `make format` and see list of files that were re-formatted.
 
-# Running the 'TODO' reminders:
+## List the 'TODO' reminders:
 - execute `make todo` and see list of TODO-s still in the code.
