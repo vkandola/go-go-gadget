@@ -4,4 +4,4 @@ GOPATH=$(pwd)
 BASE=$GOPATH/src/$PACKAGE
 
 cd $BASE
-grep -rnw . -e "TODO" -n2
+grep -rnwi . -e "TODO" -n2
