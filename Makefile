@@ -1,6 +1,7 @@
 export GOPATH=$(PWD)
 SCRIPTDIR=scripts
 
+default: usage
 test:
 	@echo "Running Gadget tests."
 	@./$(SCRIPTDIR)/test.sh
@@ -17,5 +18,5 @@ todo:
 	@echo "Greppin'for any TODOs in the source code!"
 	@./$(SCRIPTDIR)/todo.sh
 	@echo "Done Greppin'."
-all:
-	@echo "usage: make (test|format|run)"
+usage:
+	@echo "usage: make (test|format|run|todo)"
