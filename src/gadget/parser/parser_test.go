@@ -487,14 +487,117 @@ func TestBooleanExpression(t *testing.T) {
 func testBooleanLiteral(t *testing.T, exp ast.Expression, expected bool) bool {
 	boolean, ok := exp.(*ast.Boolean)
 	if !ok {
-		t.Errorf("exp not *ast.Boolean, instead was=%T", exp)
+		t.Errorf("exp not *ast.Boolean, got=%T", exp)
 		return false
 	}
 
 	if boolean.Value != expected {
-		t.Errorf("bool.Value not %s, instead was=%s", expected, boolean.Value)
+		t.Errorf("bool.Value not %s, got=%s", expected, boolean.Value)
 		return false
 	}
 
 	return true
+}
+
+func TestIfExpression(t *testing.T) {
+	input := `if (x < y) { x }`
+
+	l := lexer.New(input)
+	p := New(l)
+	program := p.ParseProgram()
+	checkParserErrors(t, p)
+
+	testNumberProgramStatements(t, program, 1)
+
+	stmt, ok := program.Statements[0].(*ast.ExpressionStatement)
+	if !ok {
+		t.Fatalf("program.statements[0] is not ast.ExpressionStatement, got=%T",
+			program.Statements[0])
+	}
+
+	ifexp, ok := stmt.Expression.(*ast.IfExpression)
+	if !ok {
+		t.Fatalf("expression not *ast.IfExpression, got=%T", stmt.Expression)
+	}
+
+	if !testInfixExpression(t, ifexp.Check, "x", "<", "y") {
+		return
+	}
+
+	// TODO: Refactor out a testBlockStatement!
+	if len(ifexp.Then.Statements) != 1 {
+		t.Errorf("Then-block is not 1 statement, got=%d\n",
+			len(ifexp.Then.Statements))
+	}
+
+	then, ok := ifexp.Then.Statements[0].(*ast.ExpressionStatement)
+	if !ok {
+		t.Fatalf("Then.Statements[0] *ast.Expression, got=%T",
+			ifexp.Then.Statements[0])
+	}
+
+	if !testIdentifier(t, then.Expression, "x") {
+		return
+	}
+
+	if ifexp.Else != nil {
+		t.Errorf("Else-block is not nil, got=%+v", ifexp.Else)
+	}
+}
+
+func TestIfElseExpression(t *testing.T) {
+	input := `if (x < y) { x } else { y }`
+
+	l := lexer.New(input)
+	p := New(l)
+	program := p.ParseProgram()
+	checkParserErrors(t, p)
+
+	testNumberProgramStatements(t, program, 1)
+
+	stmt, ok := program.Statements[0].(*ast.ExpressionStatement)
+	if !ok {
+		t.Fatalf("program.statements[0] is not ast.ExpressionStatement, got=%T",
+			program.Statements[0])
+	}
+
+	ifexp, ok := stmt.Expression.(*ast.IfExpression)
+	if !ok {
+		t.Fatalf("expression not *ast.IfExpression, got=%T", stmt.Expression)
+	}
+
+	if !testInfixExpression(t, ifexp.Check, "x", "<", "y") {
+		return
+	}
+
+	// TODO: Refactor out a testBlockStatement!
+	if len(ifexp.Then.Statements) != 1 {
+		t.Errorf("Then-block is not 1 statement, got=%d\n",
+			len(ifexp.Then.Statements))
+	}
+
+	thenBlock, ok := ifexp.Then.Statements[0].(*ast.ExpressionStatement)
+	if !ok {
+		t.Fatalf("Then.Statements[0] *ast.Expression, got=%T",
+			ifexp.Then.Statements[0])
+	}
+
+	if !testIdentifier(t, thenBlock.Expression, "x") {
+		return
+	}
+
+	if len(ifexp.Else.Statements) != 1 {
+		t.Errorf("Else-block is not 1 statement, got=%d\n",
+			len(ifexp.Else.Statements))
+	}
+
+	elseBlock, ok := ifexp.Else.Statements[0].(*ast.ExpressionStatement)
+	if !ok {
+		t.Fatalf("Else.Statements[0] *ast.Expression, got=%T",
+			ifexp.Else.Statements[0])
+	}
+
+	if !testIdentifier(t, elseBlock.Expression, "y") {
+		return
+	}
 }
