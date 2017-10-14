@@ -578,7 +578,7 @@ func TestIfElseExpression(t *testing.T) {
 
 	thenBlock, ok := ifexp.Then.Statements[0].(*ast.ExpressionStatement)
 	if !ok {
-		t.Fatalf("Then.Statements[0] *ast.Expression, got=%T",
+		t.Fatalf("Then.Statements[0] is not *ast.ExpressionStatement, got=%T",
 			ifexp.Then.Statements[0])
 	}
 
@@ -593,7 +593,7 @@ func TestIfElseExpression(t *testing.T) {
 
 	elseBlock, ok := ifexp.Else.Statements[0].(*ast.ExpressionStatement)
 	if !ok {
-		t.Fatalf("Else.Statements[0] *ast.Expression, got=%T",
+		t.Fatalf("Else.Statements[0] is not *ast.ExpressionStatement, got=%T",
 			ifexp.Else.Statements[0])
 	}
 
