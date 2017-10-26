@@ -1,7 +1,10 @@
 export GOPATH=$(PWD)
 SCRIPTDIR=scripts
 
+.PHONY: test
+
 default: usage
+
 test:
 	@echo "Running Gadget tests."
 	@./$(SCRIPTDIR)/test.sh
