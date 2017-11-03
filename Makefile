@@ -1,10 +1,11 @@
 export GOPATH=$(PWD)
 SCRIPTDIR=scripts
 
-.PHONY: test
+.PHONY: usage format todo test run
 
 default: usage
 
+all: usage format todo test run
 test:
 	@echo "Running Gadget tests."
 	@./$(SCRIPTDIR)/test.sh
